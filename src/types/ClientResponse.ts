@@ -1,6 +1,7 @@
 export default interface ClientResponse {
 	error: boolean | {
-		message: string
+		message: string,
+		apiMessage: string
 	};
-	response?: Record<string, unknown>;
+	response?: unknown;
 }

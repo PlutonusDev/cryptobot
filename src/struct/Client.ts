@@ -10,11 +10,13 @@ export default class Client {
 		this._client = new CoinbasePro(this._config);
 	}
 
-	listAccounts(): Promise<ClientResponse> {
+	listCoinbaseAccounts(): Promise<ClientResponse> {
 		return new Promise((res, rej) => {
-			this._client.rest.account.listAccounts().then(accounts => {
-				res({ error: false, response: { accounts: accounts } });
-			}).catch(err => rej({ error: { message: "Failed to retrieve accounts list.", apiMessage: err.message } }));
+			this._client.rest.account.listCoinbaseAccounts().then(accounts => {
+				return res({ error: false, response: { accounts: accounts } });
+			}).catch((err: ErrorEvent) => {
+				return rej({ error: { message: "Failed to retrieve Coinbase account list.", apiMessage: err.message } });
+			});
 		});
 	}
 }
